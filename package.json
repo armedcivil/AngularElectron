@@ -3,12 +3,12 @@
     "version": "0.0.0",
     "license": "MIT",
     "scripts": {
-        "ng": "ng",
-        "start": "ng serve",
-        "build": "ng build",
-        "test": "ng test",
-        "lint": "ng lint",
-        "e2e": "ng e2e"
+        "prepare":"cp electron.js ./dist/ && cp package.json ./dist/ && cp -r node_modules ./dist/",
+        "pack": "node_modules/.bin/asar pack dist build/app.asar",
+        "build": "node_modules/.bin/ng build && npm run prepare && npm run pack",
+        "electron:debug":"node_modules/.bin/ng build && node_modules/.bin/electron . debug",
+        "electron:run":"npm run build && node_modules/.bin/electron build/app.asar",
+        "electron:build":"npm run build && node_modules/.bin/electron build/app.asar"
     },
     "main": "electron.js",
     "private": true,
@@ -34,6 +34,7 @@
         "@types/jasmine": "~2.5.53",
         "@types/jasminewd2": "~2.0.2",
         "@types/node": "~6.0.60",
+        "asar": "^0.14.0",
         "codelyzer": "^4.0.1",
         "jasmine-core": "~2.6.2",
         "jasmine-spec-reporter": "~4.1.0",
