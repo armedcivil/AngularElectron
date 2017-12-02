@@ -3,7 +3,8 @@
     "version": "0.0.0",
     "license": "MIT",
     "scripts": {
-        "prepare": "cp electron.js ./dist/ && cp package.json ./dist/ && cp -r node_modules ./dist/",
+        "prepare": "cp electron.js ./dist/ && cp package.json ./dist/ && npm run copy-modules",
+        "copy-modules":"node_modules/.bin/copy-node-modules ./ dist",
         "pack": "node_modules/.bin/asar pack dist build/app.asar",
         "build": "node_modules/.bin/ng build && npm run prepare && npm run pack",
         "electron:debug": "node_modules/.bin/ng build && node_modules/.bin/electron . debug",
@@ -36,6 +37,7 @@
         "@types/node": "~6.0.60",
         "asar": "^0.14.0",
         "codelyzer": "^4.0.1",
+        "copy-node-modules": "^1.0.2",
         "electron-packager": "^10.1.0",
         "jasmine-core": "~2.6.2",
         "jasmine-spec-reporter": "~4.1.0",
