@@ -3,12 +3,12 @@
     "version": "0.0.0",
     "license": "MIT",
     "scripts": {
-        "prepare": "cp electron.js ./dist/ && cp package.json ./dist/ && cp -r node_modules ./dist/",
+        "build-prepare": "cp electron.js ./dist/ && cp package.json ./dist/ && cp -r node_modules ./dist/",
         "pack": "node_modules/.bin/asar pack dist build/app.asar",
-        "build": "node_modules/.bin/ng build && npm run prepare && npm run pack",
+        "build": "node_modules/.bin/ng build && npm run build-prepare && npm run pack",
         "electron:debug": "node_modules/.bin/ng build && node_modules/.bin/electron . debug",
         "electron:run": "npm run build && node_modules/.bin/electron build/app.asar",
-        "electron:build": "npm run prepare && node_modules/.bin/electron-packager --out build ./dist"
+        "electron:build": "npm run build-prepare && node_modules/.bin/electron-packager --out build ./dist"
     },
     "main": "electron.js",
     "private": true,
